@@ -1,4 +1,3 @@
-from multiprocessing.dummy import JoinableQueue
 from random import random
 from class_joueur import Joueur
 
@@ -26,7 +25,7 @@ class morpion:
         """
         self.cases[x][y] = car
 
-    def veri_Jeu(self,tour):
+    def veri_Jeu(self,tour)->int:
         """
         cette methode verifie si la partie est fini, si oui elle envoi "X" ou "O" pour le gagnant, 0 pour égalité et -1 pour le reste des cas
         """
