@@ -1,29 +1,26 @@
+from numpy import append
 from class_morpion import *
 from puissance4 import *
-from class_joueur import *
- 
+
+class Joueur:
+    def __init__(self):
+        self.score = 0
+        self.nom = ""
+
 if __name__ == "__main__":
 
     i : int
     n : int
-    joueurs : list
-    jeu : int
+    Joueur1 : Joueur
 
-    jeu = -1
-    joueurs = []
-    n = -1
+    Joueur1 = Joueur()
 
-    while n < 1:
-        n = int(input("rentrez le nombre de joueurs : "))
-        if n < 1:
-            print("le chiffre doit être supérieur à 0")
-    for i in range(n):
-        joueurs.append(Joueur(input("rentrez le nom du joueur -> ")))
-    while jeu > 4 or jeu < 1:
-        jeu = int(input("\n -----------------------------\n\nRentrez la valeur de quel jeu vous voulez jouer \n Morpion :    1 \n\n Puissance4 : 2\n\n Allumettes : 3\n\n Devinettes : 4\n\n --> "))
+    Joueurs = []
+    n = int(input("rentrez le nombre de joueurs : "))
 
-    
-
+    for i in range(0,n):
+        i = Joueur()
+        Joueurs.append(i.nom = input("Rentrez le nom du Joueur",i," : "))
 
 
 
