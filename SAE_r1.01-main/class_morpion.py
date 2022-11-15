@@ -214,10 +214,10 @@ def Morpion(j1:Joueur,j2:Joueur):
         
         if j1_vic > j2_vic:
             j1.scoreM += 1
-            return 0
+            print("vainqueur est ", j1.nom)
         else:
             j2.scoreM += 1
-            return 1
+            print("vainqueur est ", j2.nom)
         
         
 

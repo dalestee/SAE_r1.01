@@ -1,12 +1,22 @@
 from random import random
 from class_joueur import Joueur
 
-def marquer(table,x:int,tour:int):
+def marquer(table:list,x:int,tour:int):
+    """_summary_
+
+    Args:
+        table (list): la table de puissance 4
+        x (int): coordonée ou l'on marque
+        tour (int): quel est le tour que l'on joue
+
+    Returns:
+        int : 
+    """
 
     y:int
     y=5
 
-    if table[x][0] != " ":
+    if table[0][x] != " ":
         return 0
     else:
         while y >= 0 and table[y][x] != " ":
@@ -392,9 +402,12 @@ def Puissance4(j1:Joueur,j2:Joueur):
     if j1_vic>j2_vic:
         j1.scoreP += 1
         print("vainqueur est ", j1.nom)
+        j1.scoreP += 1
     else:
         j2.scoreP += 1
         print("vainqueur est ", j2.nom)
+        j2.scoreP += 1
+    
         
 if __name__ == "__main__":
     j1 : Joueur
