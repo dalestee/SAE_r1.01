@@ -95,4 +95,4 @@ while choix != 8:
         leaderboard(joueurs)
     elif choix == 7:
         effacer_Joueurs()
-        Joueurs = []
+        joueurs = []
