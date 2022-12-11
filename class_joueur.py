@@ -5,3 +5,5 @@ class Joueur:
     scoreP : int
     scoreD : int
     scoreA : int
+    botSimple : bool
+    botComplex : bool

@@ -110,6 +110,7 @@ def Entree_joueurs(Joueurs:list[Joueur],players:list[str])->None:
             j_temp.scoreM = 0
             j_temp.scoreP = 0
             j_temp.scoreT = 0
+            j_temp.bot = False
             Joueurs.append(j_temp)
 
 def effacer_Joueurs()->None:

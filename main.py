@@ -49,6 +49,8 @@ while choix != 8:
         for i in range(1,3): #demande le nom pour chaque joueur
             print("Rentrez le nom du Joueur ",i," : ",end="")
             nom = input("")
+            while nom == "0":
+                nom = input("Le nom '0' et '-1' ne sont pas autorisés veuillez resaisir un autre nom : ")
             players_nom.append(nom)
         if len(joueurs) == 0:
             CreerTableJoueurs(joueurs)
