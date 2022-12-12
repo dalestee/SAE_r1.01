@@ -218,7 +218,6 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
                         tour += 1
                 elif tour == 4:
                     p_vic = veri_Pvictoire(board)
-                    print(p_vic)
                     if p_vic[0] == "X" or p_vic[0] == "O":
                         marque(board,p_vic[1][0],p_vic[1][1],"X")
                         afficher(board)
@@ -234,7 +233,7 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
     
                 elif tour == 6:
                     p_vic = veri_Pvictoire(board)
-                    if p_vic[0] == "X":
+                    if p_vic[0] == "X" or p_vic[0] == "O":
                         marque(board,p_vic[1][0],p_vic[1][1],"X")
                         afficher(board)
                         tour += 1
@@ -246,23 +245,22 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
                         tour += 1
                 elif tour == 8:
                     ensemble = ensemble_caseVide(board)
-                    print(ensemble)
                     marque(board,ensemble[0][0],ensemble[0][1],"X")
                     afficher(board)
                     tour += 1
-                else:
+            else:
+                x = int(input("entrez la ligne : "))
+                y = int(input("entrez la colonne : "))
+                while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
+                    if (x<0 or x>2)or(y<0 or y>2):
+                        print("\nentrée hors limite\n")
+                    elif (board[x][y] == "X" or board[x][y] == "O"):
+                        print("\nCase deja marqué\n")
                     x = int(input("entrez la ligne : "))
                     y = int(input("entrez la colonne : "))
-                    while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
-                        if (x<0 or x>2)or(y<0 or y>2):
-                            print("\nentrée hors limite\n")
-                        elif (board[x][y] == "X" or board[x][y] == "O"):
-                            print("\nCase deja marqué\n")
-                        x = int(input("entrez la ligne : "))
-                        y = int(input("entrez la colonne : "))
-                    marque(board,x,y,"X")
-                    afficher(board)
-                    tour += 1
+                marque(board,x,y,"X")
+                afficher(board)
+                tour += 1
         else:
             print("")
             print("tour de ",j2.nom)
@@ -278,9 +276,50 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
                 tour += 1
             elif j2.botComplex: #vérifie si le joueur est un bot complexe
                 if tour == 1:
-                    marque(board,1,1,"O")
+                    if board[1][1] == " ":
+                        marque(board,1,1,"O")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        marque(board,0,0,"O")
+                        afficher(board)
+                        tour += 1
                 elif tour == 3:
-                    pass
+                    p_vic = veri_Pvictoire(board)
+                    if p_vic[0] == "X" or p_vic[0] == "O":
+                        marque(board,p_vic[1][0],p_vic[1][1],"O")
+                        afficher(board)
+                        tour += 1
+                    elif board[0][1] != "X":
+                        marque(board,0,1,"O")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        marque(board,1,0,"O")
+                        afficher(board)
+                        tour += 1
+                elif tour == 5:
+                    p_vic = veri_Pvictoire(board)
+                    if p_vic[0] == "X" or p_vic[0] == "O":
+                        marque(board,p_vic[1][0],p_vic[1][1],"O")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        marque(board,2,0,"O")
+                        afficher(board)
+                        tour += 1
+                elif tour == 7:
+                    p_vic = veri_Pvictoire(board)
+                    if p_vic[0] == "X" or p_vic[0] == "O":
+                        marque(board,p_vic[1][0],p_vic[1][1],"O")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        ensemble = ensemble_caseVide(board)
+                        marque(board,ensemble[0][0],ensemble[0][1],"O")
+                        afficher(board)
+                        tour += 1
+                    
             else:
                 x = int(input("entrez la ligne : "))
                 y = int(input("entrez la colonne : "))
@@ -359,17 +398,17 @@ if __name__ == "__main__":
     j2.scoreM = 0
     j1.scoreT = 0
     j2.scoreT = 0
-    j1.botSimple = False
+    j1.botSimple = True
     j2.botSimple = False
-    j1.botComplex = True
-    j2.botComplex = False
+    j1.botComplex = False
+    j2.botComplex = True
     j1.nom = "bot"
     j2.nom = "j2"
     Morpion(j1,j2)
     print("scoreM j1 : ",j1.scoreM,"scoreT j1 : ",j1.scoreT)
     print("\nscoreM j2 : ",j2.scoreM,"scoreT j2 : ",j2.scoreT)
-    board = [["X"," "," "],
-             ["O"," "," "],
-             ["X"," ","O"]]
-    #print(veri_Pvictoire(board))
+    board = [["X","X"," "],
+             ["O","O","X"],
+             ["X","X","O"]]
+    print(veri_Pvictoire(board))
         
