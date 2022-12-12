@@ -103,7 +103,7 @@ def veri_Pvictoire(board : list[list])->str:
             if board[2][0] == board[2][2] and (board[2][0] == "X" or board[2][0] == "O"):
                 return [board[2][0],casesVides[case]]
             elif board[1][0] == board[1][1] and (board[1][0] == "X" or board[1][0] == "O"):
-                return [board[0][1],casesVides[case]]
+                return [board[1][0],casesVides[case]]
         elif casesVides[case][0] == 0 and casesVides[case][1] == 2:
             if board[1][1] == board[2][0] and (board[1][1] == "X" or board[1][1] == "O"):
                 return [board[1][1],casesVides[case]]
@@ -115,7 +115,7 @@ def veri_Pvictoire(board : list[list])->str:
             if board[0][2] == board[2][2] and (board[0][2] == "X" or board[0][2] == "O"):
                 return [board[0][2],casesVides[case]]
             elif board[1][0] == board[1][1] and (board[1][0] == "X" or board[1][0] == "O"):
-                return [board[0][1],casesVides[case]]
+                return [board[1][0],casesVides[case]]
         elif casesVides[case][0] == 2 and casesVides[case][1] == 2:
             if board[0][0] == board[1][1] and (board[0][0] == "X" or board[0][0] == "O"):
                 return [board[0][0],casesVides[case]]
@@ -189,112 +189,117 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
              [" "," "," "],
              [" "," "," "]]
     while True:
-                if tour % 2 == 0:
-                    print("")
-                    print("tour de ",j1.nom)
-                    print("")
-                    if j1.botSimple: #vérifie si le joueur est un bot simple
-                        x = randint(0,2)
-                        y = randint(0,2)
-                        while board[x][y] == "X" or board[x][y] == "O":
-                            x = randint(0,2)
-                            y = randint(0,2)
-                        marque(board,x,y,"X")
+        if tour % 2 == 0:
+            print("")
+            print("tour de ",j1.nom)
+            print("")
+            if j1.botSimple: #vérifie si le joueur est un bot simple
+                x = randint(0,2)
+                y = randint(0,2)
+                while board[x][y] == "X" or board[x][y] == "O":
+                    x = randint(0,2)
+                    y = randint(0,2)
+                marque(board,x,y,"X")
+                afficher(board)
+                tour += 1
+            elif j1.botComplex: #vérifie si le joueur est un bot complexe
+                if tour == 0:
+                    marque(board,0,0,"X")
+                    afficher(board)
+                    tour += 1
+                elif tour == 2:
+                    if board[1][0] == "O" or board[2][0] == "O":
+                        marque(board,0,2,"X")
                         afficher(board)
                         tour += 1
-                    elif j1.botComplex: #vérifie si le joueur est un bot complexe
-                        if tour == 0:
-                            marque(board,0,0,"X")
-                            afficher(board)
-                            tour += 1
-                        elif tour == 2:
-                            if board[1][0] == "O" or board[2][0] == "O":
-                                marque(board,0,2,"X")
-                                afficher(board)
-                                tour += 1
-                            else:
-                                marque(board,2,0,"X")
-                                afficher(board)
-                                tour += 1
-                        elif tour == 4:
-                            p_vic = veri_Pvictoire(board)
-                            print(p_vic)
-                            if p_vic[0] == "X":
-                                marque(board,p_vic[1][0],p_vic[1][1],"X")
-                                afficher(board)
-                                tour += 1
-                            elif board[1][1] == " ":
-                                marque(board,1,1,"X")
-                                afficher(board)
-                                tour += 1
-                        elif tour == 6:
-                            p_vic = veri_Pvictoire(board)
-                            if p_vic[0] == "X":
-                                marque(board,p_vic[1][0],p_vic[1][1],"X")
-                                afficher(board)
-                                tour += 1
-                            else:
-                                ensemble = ensemble_caseVide(board)
-                                nombre_Aleatoire = randint(0,len(ensemble)-1)
-                                marque(board,ensemble[nombre_Aleatoire][0],ensemble[nombre_Aleatoire][1],"X")
-                                afficher(board)
-                                tour += 1
-                        elif tour == 8:
-                            ensemble = ensemble_caseVide(board)
-                            print(ensemble)
-                            marque(board,ensemble[0][0],ensemble[0][1],"X")
-                            afficher(board)
-                            tour += 1
                     else:
-                        x = int(input("entrez la ligne : "))
-                        y = int(input("entrez la colonne : "))
-                        while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
-                            if (x<0 or x>2)or(y<0 or y>2):
-                                print("\nentrée hors limite\n")
-                            elif (board[x][y] == "X" or board[x][y] == "O"):
-                                print("\nCase deja marqué\n")
-                            x = int(input("entrez la ligne : "))
-                            y = int(input("entrez la colonne : "))
-                        marque(board,x,y,"X")
+                        marque(board,2,0,"X")
                         afficher(board)
                         tour += 1
+                elif tour == 4:
+                    p_vic = veri_Pvictoire(board)
+                    print(p_vic)
+                    if p_vic[0] == "X" or p_vic[0] == "O":
+                        marque(board,p_vic[1][0],p_vic[1][1],"X")
+                        afficher(board)
+                        tour += 1
+                    elif board[0][2] == " " and board[0][1]:
+                        marque(board,0,2,"X")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        marque(board,2,2,"X")
+                        afficher(board)
+                        tour += 1
+    
+                elif tour == 6:
+                    p_vic = veri_Pvictoire(board)
+                    if p_vic[0] == "X":
+                        marque(board,p_vic[1][0],p_vic[1][1],"X")
+                        afficher(board)
+                        tour += 1
+                    else:
+                        ensemble = ensemble_caseVide(board)
+                        nombre_Aleatoire = randint(0,len(ensemble)-1)
+                        marque(board,ensemble[nombre_Aleatoire][0],ensemble[nombre_Aleatoire][1],"X")
+                        afficher(board)
+                        tour += 1
+                elif tour == 8:
+                    ensemble = ensemble_caseVide(board)
+                    print(ensemble)
+                    marque(board,ensemble[0][0],ensemble[0][1],"X")
+                    afficher(board)
+                    tour += 1
                 else:
-                    print("")
-                    print("tour de ",j2.nom)
-                    print("")
-                    if j2.botSimple: #vérifie si le joueur est un bot simple
-                        x = randint(0,2)
-                        y = randint(0,2)
-                        while board[x][y] == "X" or board[x][y] == "O":
-                            x = randint(0,2)
-                            y = randint(0,2)
-                        marque(board,x,y,"O")
-                        afficher(board)
-                        tour += 1
-                    elif j2.botComplex: #vérifie si le joueur est un bot complexe
-                        if tour == 1:
-                            marque(board,1,1,"O")
-                        elif tour == 3:
-                            pass
-                    else:
+                    x = int(input("entrez la ligne : "))
+                    y = int(input("entrez la colonne : "))
+                    while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
+                        if (x<0 or x>2)or(y<0 or y>2):
+                            print("\nentrée hors limite\n")
+                        elif (board[x][y] == "X" or board[x][y] == "O"):
+                            print("\nCase deja marqué\n")
                         x = int(input("entrez la ligne : "))
                         y = int(input("entrez la colonne : "))
-                        while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
-                            if (x<0 or x>2)or(y<0 or y>2):
-                                print("\nentrée hors limite\n")
-                            elif (board[x][y] == "X" or board[x][y] == "O"):
-                                print("\nCase deja marqué\n")
-                            x = int(input("entrez la ligne : "))
-                            y = int(input("entrez la colonne : "))
-                        marque(board,x,y,"O")
-                        afficher(board)
-                        tour += 1
-                if veri_Jeu(board,tour) == "X":
-                    return j1
-                elif veri_Jeu(board,tour) == "O":
-                    return j2
-                elif veri_Jeu(board,tour) == "egal":
-                    return winner
+                    marque(board,x,y,"X")
+                    afficher(board)
+                    tour += 1
+        else:
+            print("")
+            print("tour de ",j2.nom)
+            print("")
+            if j2.botSimple: #vérifie si le joueur est un bot simple
+                x = randint(0,2)
+                y = randint(0,2)
+                while board[x][y] == "X" or board[x][y] == "O":
+                    x = randint(0,2)
+                    y = randint(0,2)
+                marque(board,x,y,"O")
+                afficher(board)
+                tour += 1
+            elif j2.botComplex: #vérifie si le joueur est un bot complexe
+                if tour == 1:
+                    marque(board,1,1,"O")
+                elif tour == 3:
+                    pass
+            else:
+                x = int(input("entrez la ligne : "))
+                y = int(input("entrez la colonne : "))
+                while ((x<0 or x>2)or(y<0 or y>2)) or (board[x][y] == "X" or board[x][y] == "O"):
+                    if (x<0 or x>2)or(y<0 or y>2):
+                        print("\nentrée hors limite\n")
+                    elif (board[x][y] == "X" or board[x][y] == "O"):
+                        print("\nCase deja marqué\n")
+                    x = int(input("entrez la ligne : "))
+                    y = int(input("entrez la colonne : "))
+                marque(board,x,y,"O")
+                afficher(board)
+                tour += 1
+        if veri_Jeu(board,tour) == "X":
+            return j1
+        elif veri_Jeu(board,tour) == "O":
+            return j2
+        elif veri_Jeu(board,tour) == "egal":
+            return winner
 def Morpion(j1:Joueur,j2:Joueur):
     """
     entrée (j1,j2:joueur)
@@ -310,7 +315,7 @@ def Morpion(j1:Joueur,j2:Joueur):
     y : int
 
     manches = int(input("vous voulez jouer combien de manches 1, 3 ou 5? "))
-    while manches not in [1,3,5]:
+    while manches != 1 and manches != 3 and manches !=5:
         manches = int(input("rentrez 1, 3 ou 5 : "))
     j1_vic = 0
     j2_vic = 0
