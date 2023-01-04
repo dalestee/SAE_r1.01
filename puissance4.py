@@ -1,5 +1,5 @@
 from random import random
-from class_joueur import Joueur
+from class_joeueur import Joueur
 
 def marquer(table:list,x:int,tour:int)->int:
     """

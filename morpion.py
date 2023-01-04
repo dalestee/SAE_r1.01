@@ -1,5 +1,5 @@
 from random import random,randint
-from class_joueur import Joueur
+from class_joeueur import Joueur
 
 def afficher(tabl:list[list[str]]) :
     """
@@ -174,15 +174,15 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
     Returns:
         Joueur:
     """
-    winner : Joueur
+    egal : Joueur
     x : int
     y : int
     tour : int
     p_vic : list
     ensemble : list
     nombre_Aleatoire : int
-    winner = Joueur()
-    winner.nom = "0"
+    egal = Joueur()
+    egal.nom = "0"
     tour = 0
     board : list[list[str]]
     board = [[" "," "," "],
@@ -338,7 +338,7 @@ def matche(j1:Joueur,j2:Joueur)->Joueur:
         elif veri_Jeu(board,tour) == "O":
             return j2
         elif veri_Jeu(board,tour) == "egal":
-            return winner
+            return egal
 def Morpion(j1:Joueur,j2:Joueur):
     """
     entrée (j1,j2:joueur)
@@ -349,17 +349,12 @@ def Morpion(j1:Joueur,j2:Joueur):
     compteur : int
     j1_vic : int
     j2_vic : int
-    egalite : bool
-    x : int
-    y : int
 
     manches = int(input("vous voulez jouer combien de manches 1, 3 ou 5? "))
     while manches != 1 and manches != 3 and manches !=5:
         manches = int(input("rentrez 1, 3 ou 5 : "))
     j1_vic = 0
     j2_vic = 0
-    winner = Joueur()
-    winner.nom = "-1"
     print("Pour jouer il suffit de rentrer un entier de 0 à 2 pour la ligne et la collonne ou 0 est la première ligne/colonne et 2 la dernière\n")
     for compteur in range(manches):
         if random()>0.5:
@@ -367,7 +362,6 @@ def Morpion(j1:Joueur,j2:Joueur):
         else:
             winner = matche(j2,j1)
         
-        print(winner.nom,j1.nom)
         if winner.nom == "0":
             print("\négalité :/\n")
         elif winner.nom == j1.nom:
@@ -376,7 +370,6 @@ def Morpion(j1:Joueur,j2:Joueur):
         else:
             j2_vic += 1
             print("vainqueur de la manche est ", j2.nom)
-    print(j1_vic,j2_vic,"--------------")
 
         
     if j1_vic == j2_vic:
@@ -398,9 +391,9 @@ if __name__ == "__main__":
     j2.scoreM = 0
     j1.scoreT = 0
     j2.scoreT = 0
-    j1.botSimple = True
+    j1.botSimple = False
     j2.botSimple = False
-    j1.botComplex = False
+    j1.botComplex = True
     j2.botComplex = True
     j1.nom = "bot"
     j2.nom = "j2"
@@ -410,5 +403,4 @@ if __name__ == "__main__":
     board = [["X","X"," "],
              ["O","O","X"],
              ["X","X","O"]]
-    print(veri_Pvictoire(board))
         

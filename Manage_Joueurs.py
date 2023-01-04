@@ -1,8 +1,18 @@
 from morpion import *
 from puissance4 import *
-from class_joueur import Joueur
+from class_joeueur import Joueur
 from typing import BinaryIO
 import pickle 
+
+class Joueur:
+    scoreT : int
+    nom : str
+    scoreM : int
+    scoreP : int
+    scoreD : int
+    scoreA : int
+    botSimple : bool
+    botComplex : bool
 
 def leaderboard(Joueurs:list[Joueur])->None:
     """

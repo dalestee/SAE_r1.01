@@ -1,5 +1,5 @@
 from premier_joueur import premier_joueur
-from class_joueur import Joueur
+from class_joeueur import Joueur
 def allumette(joueur1:Joueur,joueur2:Joueur):
     """
     Fonction: jeu des allumettes, qui affiche les règles et gère tour par tour les entrés des joueurs, celui retirant la dernière est perdant.

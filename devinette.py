@@ -1,4 +1,4 @@
-from class_joueur import Joueur 
+from class_joeueur import Joueur
 def devinette(joueur1:Joueur,joueur2:Joueur):
     """
     Fonction : jeu des devinettes, fonctionne en 2 manches, il ne peut y avoir d'égalité, les joueurs joueront à tour de rôle
